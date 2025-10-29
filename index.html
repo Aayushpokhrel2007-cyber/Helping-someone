@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meri Mayaluu 💖💖</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #e6f7ff);
+      padding: 20px;
+      margin: 0;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      color: #ff3399;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.2em;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      margin-bottom: 12px;
+      border: 2px solid #ff99cc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #ff66b2;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff3385;
+    }
+
+    textarea {
+      width: 100%;
+      height: 400px;
+      font-family: Consolas, monospace;
+      font-size: 1em;
+      padding: 12px;
+      box-sizing: border-box;
+      white-space: pre-wrap;
+      resize: none;
+      border: 2px solid #99ccff;
+      border-radius: 8px;
+      background-color: #f0faff;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1em;
+      color: #999;
+    }
+
+    .heart {
+      font-size: 1.5em;
+      color: #ff3399;
+    }
+  </style>
+</head>
+<body>
+  <h1>Meri Mayaluu 💖💖</h1>
+  <h2>Code written with a lot of love by <strong>aAyush</strong> for <strong>Sneha</strong> ❤️</h2>
+
+  <input type="text" id="inputLine" placeholder="Enter matrix size and equation (e.g. 3 3 2 -1 1)">
+  <button onclick="generateMatrix()">Generate Matrix</button>
+  <textarea id="output" readonly></textarea>
+
+  <div class="footer">Made with <span class="heart">❤️</span> just for you, Snehaa. Meoww</div>
+
+  <script>
+    function generateMatrix() {
+      const input = document.getElementById("inputLine").value.trim().split(" ");
+      const rows = parseInt(input[0]);
+      const cols = parseInt(input[1]);
+      const a = parseInt(input[2]);
+      const b = parseInt(input[3]);
+      const c = parseInt(input[4]);
+
+      let output = `Q. Create a ${rows}X${cols} matrix which follows the order, ${a}i ${b >= 0 ? '+' : ''}${b}j ${c >= 0 ? '+' : ''}${c}.\n\n`;
+      output += `Ans,\n\nThe structure of ${rows}X${cols} matrix is respresented as,\n\n`;
+
+      // Symbolic matrix
+      for (let i = 1; i <= rows; i++) {
+        let row = '';
+        for (let j = 1; j <= cols; j++) {
+          row += `a${i}${j}`.padEnd(6);
+        }
+        if (i === 1) {
+          output += `      ⎡ ${row}⎤\n`;
+        } else if (i === rows) {
+          output += `A =   ⎣ ${row}⎦\n`;
+        } else {
+          output += `      ⎢ ${row}⎥\n`;
+        }
+      }
+
+      output += `\nSince aij = ${a}i ${b >= 0 ? '+' : ''}${b}j ${c >= 0 ? '+' : ''}${c}\n\n`;
+      output += `Applying the equation to all matrix-elements,\n\n`;
+
+      let matrixValues = [];
+
+      for (let i = 1; i <= rows; i++) {
+        let rowValues = [];
+        for (let j = 1; j <= cols; j++) {
+          const value = a * i + b * j + c;
+          output += `a${i}${j} = ${a}X ${i} ${b >= 0 ? '+' : ''}${b}X ${j} ${c >= 0 ? '+' : ''}${c} = ${value}\n\n`;
+          rowValues.push(value);
+        }
+        matrixValues.push(rowValues);
+      }
+
+      output += `So the following matrix (Matrix A) can be presented as such.\n\n`;
+
+      // Final matrix
+      for (let i = 0; i < rows; i++) {
+        let row = '';
+        for (let j = 0; j < cols; j++) {
+          row += `${matrixValues[i][j]}`.padEnd(6);
+        }
+        if (i === 0) {
+          output += `      ⎡ ${row}⎤\n`;
+        } else if (i === rows - 1) {
+          output += `A =   ⎣ ${row}⎦\n`;
+        } else {
+          output += `      ⎢ ${row}⎥\n`;
+        }
+      }
+
+      document.getElementById("output").value = output;
+    }
+  </script>
+</body>
+</html>
